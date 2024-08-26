@@ -9,6 +9,9 @@ export default function App() {
     const [productData, setProductData] = useState(db) // Recomendado para archivos locales
     const [cart, setCart] = useState([])
 
+    // Simulemos límite de stock
+    const ITEM_STOCK_LIMIT = 5
+
     function addToCart(product) {
         const productExists = cart.find(item => item.id === product.id)
         if(productExists) {
@@ -23,9 +26,20 @@ export default function App() {
         setCart(prevCart => prevCart.filter(item => item.id !== productId))
     }
 
+    function increaseQuantity(productId) {
+        const prevCart = cart.map(item => (item.id === productId && item.quantity < ITEM_STOCK_LIMIT) ? {...item, quantity: item.quantity + 1} : item)
+        setCart(prevCart)
+    }
+
+    function decreaseQuantity(productId) {
+        const prevCart = cart.map(item => item.id === productId ? {...item, quantity: item.quantity - 1} : item)
+                             .filter(item => item.quantity > 0)
+        setCart(prevCart)
+    }
+
     return (
         <>
-        <Header cart={cart} removeFromCart={removeFromCart} />
+        <Header cart={cart} removeFromCart={removeFromCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity}/>
 
         <main className="container-xl mt-5">
             <h2 className="text-center">Nuestra Colección</h2>
