@@ -37,9 +37,13 @@ export default function App() {
         setCart(prevCart)
     }
 
+    function clearCart() {
+        setCart([])
+    }
+
     return (
         <>
-        <Header cart={cart} removeFromCart={removeFromCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity}/>
+        <Header cart={cart} removeFromCart={removeFromCart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} clearCart={clearCart}/>
 
         <main className="container-xl mt-5">
             <h2 className="text-center">Nuestra Colección</h2>
