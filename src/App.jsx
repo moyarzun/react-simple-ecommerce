@@ -6,11 +6,18 @@ import { db } from './data/db'
 
 export default function App() {
     // >>>>>>> STATES, VARIABLES Y FUNCIONES <<<<<<<
+    const initialCart = JSON.parse(localStorage.getItem('cart')) || []
     const [productData, setProductData] = useState(db) // Recomendado para archivos locales
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState(initialCart)
 
     // Simulemos límite de stock
     const ITEM_STOCK_LIMIT = 5
+
+    // UseEffect - monitoreo de cambios en el carrito
+    // Guardamos el contenido del carrito en el localStorage cada vez que cambie
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart])
 
     function addToCart(product) {
         const productExists = cart.find(item => item.id === product.id)
