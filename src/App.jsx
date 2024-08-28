@@ -7,7 +7,7 @@ import { db } from './data/db'
 export default function App() {
     // >>>>>>> STATES, VARIABLES Y FUNCIONES <<<<<<<
     const initialCart = JSON.parse(localStorage.getItem('cart')) || []
-    const [productData, setProductData] = useState(db) // Recomendado para archivos locales
+    const [productData] = useState(db) // Recomendado para archivos locales
     const [cart, setCart] = useState(initialCart)
 
     // Simulemos límite de stock
