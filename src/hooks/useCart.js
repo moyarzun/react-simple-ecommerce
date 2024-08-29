@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { db } from '../data/db'
 
 export const useCart = () => {
-    // >>>>>>> STATES, VARIABLES Y FUNCIONES <<<<<<<
+    // >>>>>>> STATES, VARIABLES Y FUNCIONES DE APP <<<<<<<
     const initialCart = JSON.parse(localStorage.getItem('cart')) || []
     const [productData] = useState(db) // Recomendado para archivos locales
     const [cart, setCart] = useState(initialCart)
@@ -44,6 +44,12 @@ export const useCart = () => {
     function clearCart() {
         setCart([])
     }
+
+    // >>>>>>>>>> STATES, VARIABLES Y FUNCIONES DE HEADER <<<<<<<<<<
+
+    // State Derivado
+    const isEmpty = useMemo(() => cart.length === 0, [cart])
+    const cartTotal = useMemo(() => cart.reduce((total, product) => total + product.price * product.quantity, 0), [cart])
 
     return { cart, productData, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart }
 }

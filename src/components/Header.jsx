@@ -15,13 +15,11 @@
 //(este último import se hace en main.jsx)
 
 // >>>>>>> IMPORTAR LIBRERIAS <<<<<<<
+import { useCart } from '../hooks/useCart'
 
-import { useMemo } from 'react'
 export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart}) {
 
-    // State Derivado
-    const isEmpty = useMemo(() => cart.length === 0, [cart])
-    const cartTotal = useMemo(() => cart.reduce((total, product) => total + product.price * product.quantity, 0), [cart])
+    const { isEmpty, cartTotal } = useCart()
 
     return (
         <header className="py-5 header">
