@@ -15,11 +15,7 @@
 //(este último import se hace en main.jsx)
 
 // >>>>>>> IMPORTAR LIBRERIAS <<<<<<<
-import { useCart } from '../hooks/useCart'
-
-export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart}) {
-
-    const { isEmpty, cartTotal } = useCart()
+export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, isEmpty, cartTotal}) {
 
     return (
         <header className="py-5 header">
