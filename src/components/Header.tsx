@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 //Reglas JSX:
 // 1. Toda etiqueta debe cerrarse.
 // 2. Los componentes deben devolver un solo elemento padre.
@@ -14,8 +13,20 @@
 //import React from 'react' => <React.Fragment></React.Fragment> || <></>
 //(este último import se hace en main.jsx)
 
+import type { ProductItem, ProductId } from '../types'
+
+type HeaderProps = {
+    cart: ProductItem[],
+    removeFromCart: (id: ProductId) => void,
+    increaseQuantity: (id: ProductId) => void,
+    decreaseQuantity: (id: ProductId) => void,
+    clearCart: () => void,
+    isEmpty: boolean,
+    cartTotal: number
+}
+
 // >>>>>>> IMPORTAR LIBRERIAS <<<<<<<
-export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, isEmpty, cartTotal}) {
+export default function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, isEmpty, cartTotal}: HeaderProps) {
 
     return (
         <header className="py-5 header">
