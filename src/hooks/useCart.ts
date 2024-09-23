@@ -4,7 +4,9 @@ import type { Product, ProductItem, ProductId } from '../types'
 
 export const useCart = () => {
     // >>>>>>> STATES, VARIABLES Y FUNCIONES DE APP <<<<<<<
-    const initialCart = JSON.parse(localStorage.getItem('cart') ?? '') || []
+
+    const cartFromStorage = localStorage.getItem('cart');
+    const initialCart = cartFromStorage ? JSON.parse(cartFromStorage) : []
     const [productData] = useState(db) // Recomendado para archivos locales
     const [cart, setCart] = useState(initialCart)
 
